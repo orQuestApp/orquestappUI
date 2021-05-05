@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "771555269247",
+    "project_id": "orquestapp-aeff5",
+    "storage_bucket": "orquestapp-aeff5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771555269247:android:6e750ebea88b1d810ffd4a",
+        "android_client_info": {
+          "package_name": "com.example.orquestapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771555269247-q30qp28vol072fehnp98m68045rq6nuo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.orquestapp",
+            "certificate_hash": "85489e3ec1422d1019ce6a26bdcf682dfac472d6"
+          }
+        },
+        {
+          "client_id": "771555269247-7sp2v9k77meqtb157k9tj9l8jra3hi67.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCS3bzfVmay2utwU0QruQda1OHRBWpooTw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771555269247-7sp2v9k77meqtb157k9tj9l8jra3hi67.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

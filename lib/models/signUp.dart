@@ -148,12 +148,12 @@ Widget inputFile({label, obscureText = false})
                 horizontal: 10),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                  color: Colors.grey[400]
+                  color: Colors.grey
               ),
 
             ),
             border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey[400])
+                borderSide: BorderSide(color: Colors.grey)
             )
         ),
       ),
