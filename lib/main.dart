@@ -1,9 +1,11 @@
 import 'dart:ui';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:orquestapp/models/login.dart';
 import 'package:orquestapp/models/signUp.dart';
+import 'package:orquestapp/screens/firstScreen.dart';
 
-void main() {
+void main()  {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: HomePage(),
@@ -61,8 +63,10 @@ class HomePage extends StatelessWidget {
                   MaterialButton(
                     minWidth: double.infinity,
                     height: 60,
-                    onPressed: () {
-                      // TODO: Implement signIn
+                    onPressed: () { /*
+                          googleSignIn().whenComplete(() {
+                          Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => Explore() */
                     },
                     color: Color(0xFF104787),
                     shape: RoundedRectangleBorder(

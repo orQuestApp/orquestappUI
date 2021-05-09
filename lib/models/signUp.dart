@@ -17,8 +17,6 @@ class SignupPage extends StatelessWidget {
           icon: Icon(Icons.arrow_back_ios,
             size: 20,
             color: Colors.black,),
-
-
         ),
       ),
       body: SingleChildScrollView(
@@ -35,20 +33,16 @@ class SignupPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-
                     ),),
                   SizedBox(height: 20,),
                   Text("Create an account, It's free ",
                     style: TextStyle(
                         fontSize: 15,
                         color:Colors.grey[700]),)
-
-
                 ],
               ),
               Column(
                 children: <Widget>[
-                  inputFile(label: "Username"),
                   inputFile(label: "Email"),
                   inputFile(label: "Password", obscureText: true),
                   inputFile(label: "Confirm Password ", obscureText: true),
@@ -64,11 +58,7 @@ class SignupPage extends StatelessWidget {
                       top: BorderSide(color: Colors.black),
                       left: BorderSide(color: Colors.black),
                       right: BorderSide(color: Colors.black),
-
-
-
                     )
-
                 ),
                 child: MaterialButton(
                   minWidth: double.infinity,
@@ -78,21 +68,15 @@ class SignupPage extends StatelessWidget {
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50),
-
                   ),
                   child: Text(
                     "Sign up", style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 18,
                     color: Colors.white,
-
                   ),
                   ),
-
                 ),
-
-
-
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -105,23 +89,13 @@ class SignupPage extends StatelessWidget {
                   )
                 ],
               )
-
-
-
             ],
-
           ),
-
-
         ),
-
       ),
-
     );
   }
 }
-
-
 
 // we will be creating a widget for text field
 Widget inputFile({label, obscureText = false})
@@ -136,7 +110,6 @@ Widget inputFile({label, obscureText = false})
             fontWeight: FontWeight.w400,
             color:Colors.black87
         ),
-
       ),
       SizedBox(
         height: 5,
@@ -150,7 +123,6 @@ Widget inputFile({label, obscureText = false})
               borderSide: BorderSide(
                   color: Colors.grey
               ),
-
             ),
             border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey)
