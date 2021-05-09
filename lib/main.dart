@@ -1,13 +1,43 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:orquestapp/models/login.dart';
 import 'package:orquestapp/models/signUp.dart';
 
+
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: HomePage(),
-  ));
+    home: MyHomePage(), // go to stateful widget
+  )
+  );
+}
+
+// stateful widget connect to splashscreen
+class MyHomePage extends StatefulWidget {
+  @override
+  SplashScreenState createState() => SplashScreenState();
+}
+
+class SplashScreenState extends State<MyHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    Timer(Duration(seconds: 5),
+            ()=>Navigator.pushReplacement(context,
+            MaterialPageRoute(builder:
+                (context) => HomePage()
+            )
+        )
+    );
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        color: Colors.deepPurpleAccent,
+        child: Image.asset('assets/logo.png')
+    );
+  }
 }
 
 class HomePage extends StatelessWidget {
@@ -53,7 +83,7 @@ class HomePage extends StatelessWidget {
                 height: MediaQuery.of(context).size.height / 3,
                 decoration: BoxDecoration(
                     image:
-                        DecorationImage(image: AssetImage("assets/logo.png"))),
+                    DecorationImage(image: AssetImage("assets/logo.png"))),
               ),
               Column(
                 children: <Widget>[
@@ -92,7 +122,7 @@ class HomePage extends StatelessWidget {
                     child: Text(
                       "Login",
                       style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+                      TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                     ),
                   ),
                   // creating the signup button
