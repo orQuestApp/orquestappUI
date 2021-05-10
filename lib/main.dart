@@ -1,16 +1,21 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:orquestapp/models/login.dart';
 import 'package:orquestapp/models/signUp.dart';
+import 'package:orquestapp/utils/auth.dart';
+import 'package:provider/provider.dart';
 
 
-void main() {
+// TODO: Main -> Landing page -> signin / signup / googleSignIn
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: MyHomePage(), // go to stateful widget
-  )
-  );
+  ));
 }
 
 // stateful widget connect to splashscreen
@@ -23,24 +28,45 @@ class SplashScreenState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 5),
-            ()=>Navigator.pushReplacement(context,
-            MaterialPageRoute(builder:
-                (context) => HomePage()
-            )
-        )
+    Timer(
+        Duration(seconds: 5),
+        () => Navigator.pushReplacement(
+            context, MaterialPageRoute(
+            builder: (context) => HomePage()
+        ))
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.deepPurpleAccent,
-        child: Image.asset('assets/logo.png')
-    );
+        color: Colors.deepPurpleAccent, child: Image.asset('assets/logo.png'));
   }
 }
 
+
 class HomePage extends StatelessWidget {
+
+  Future<void> _signInWithGoogle(BuildContext context) async {
+    try {
+      final auth = Provider.of<AuthService>(context, listen: false);
+      await auth.signInWithGoogle();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+/*
+  Future<void> _signInWithFacebook(BuildContext context) async {
+    try {
+      final auth = Provider.of<AuthService>(context, listen: false);
+      await auth.signInWithFacebook();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+*/
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +109,7 @@ class HomePage extends StatelessWidget {
                 height: MediaQuery.of(context).size.height / 3,
                 decoration: BoxDecoration(
                     image:
-                    DecorationImage(image: AssetImage("assets/logo.png"))),
+                        DecorationImage(image: AssetImage("assets/logo.png"))),
               ),
               Column(
                 children: <Widget>[
@@ -92,7 +118,7 @@ class HomePage extends StatelessWidget {
                     minWidth: double.infinity,
                     height: 60,
                     onPressed: () {
-                      // TODO: Implement signIn
+                      _signInWithGoogle(context);
                     },
                     color: Color(0xFF104787),
                     shape: RoundedRectangleBorder(
@@ -122,7 +148,7 @@ class HomePage extends StatelessWidget {
                     child: Text(
                       "Login",
                       style:
-                      TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                     ),
                   ),
                   // creating the signup button
