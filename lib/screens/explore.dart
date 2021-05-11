@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class Explore extends StatefulWidget{
   @override
   _ExploreState createState() => _ExploreState();

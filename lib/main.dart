@@ -4,45 +4,45 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:orquestapp/models/login.dart';
 import 'package:orquestapp/models/signUp.dart';
+import 'package:orquestapp/screens/landingPage.dart';
 import 'package:orquestapp/utils/auth.dart';
 import 'package:provider/provider.dart';
 
-
 // TODO: Main -> Landing page -> sign in / signup / googleSignIn
+
+
+// Main page, flow is: Main -> Landing page -> sign in / signup / googleSignIn
 void main() async{
+  // before firebase
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: MyHomePage(), // go to stateful widget
-  ));
+  runApp(MyApp());
 }
 
-// stateful widget connect to splashscreen
-class MyHomePage extends StatefulWidget {
+class MyApp extends StatefulWidget {
   @override
-  SplashScreenState createState() => SplashScreenState();
+  _MyAppState createState() => _MyAppState();
 }
 
-class SplashScreenState extends State<MyHomePage> {
-  @override
-  void initState() {
-    super.initState();
-    Timer(
-        Duration(seconds: 5),
-        () => Navigator.pushReplacement(
-            context, MaterialPageRoute(
-            builder: (context) => HomePage()
-        ))
-    );
-  }
-
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Colors.deepPurpleAccent, child: Image.asset('assets/logo.png'));
+    return Provider<AuthService>(
+      create: (context) => AuthService(),
+      child: MaterialApp(
+        title: 'OrquestApp',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: Colors.grey[700],
+          //accentColor: ,
+        ),
+        home: LandingPage(),
+      ),
+    );
   }
 }
+
+
 
 
 class HomePage extends StatelessWidget {
