@@ -1,6 +1,7 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+//import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 
@@ -18,13 +19,13 @@ class AuthService {
   Future<void> signOut() async {
     final googleSignIn = GoogleSignIn();
     await googleSignIn.signOut();
-    final facebookLogin = FacebookLogin();
-    await facebookLogin.logOut();
+    // final facebookLogin = FacebookLogin();
+    //await facebookLogin.logOut();
     await _firebaseAuth.signOut();
   }
 
   // Login with facebook
- /* Future<User> signInWithFacebook() async {
+  /* Future<User> signInWithFacebook() async {
     final fb = FacebookLogin();
     final response = await fb.logIn(['email']);
     switch (response.status) {

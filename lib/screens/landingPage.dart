@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:orquestapp/main.dart';
-import 'package:orquestapp/models/login.dart';
-import 'package:orquestapp/models/signUp.dart';
+import 'package:flutter/material.dart';
+import 'package:orquestapp/screens/Explore.dart';
 import 'package:orquestapp/utils/auth.dart';
 import 'package:provider/provider.dart';
+import '../HomePage.dart';
 
 class LandingPage extends StatefulWidget{
   @override
@@ -20,12 +20,13 @@ class _LandingPageState extends State<LandingPage> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           final User user = snapshot.data;
+          // ignore: unnecessary_null_comparison
           if (user == null) {
-            return SignupPage();
+            return HomePage();
           }
-          return LoginPage();
+          return Explore();
         }
-        return HomePage();
+        return CircularProgressIndicator();   //HomePage(); //ircularProgressIndicator()= loading screen
       },
     );
   }

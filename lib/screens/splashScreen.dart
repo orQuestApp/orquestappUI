@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../main.dart';
+import 'package:orquestapp/screens/landingPage.dart';
 
-class MyHomePage extends StatefulWidget {
+class SplashScreen extends StatefulWidget {
   @override
   SplashScreenState createState() => SplashScreenState();
 }
 
 // stateful widget connect to splashscreen
-class SplashScreenState extends State<MyHomePage> {
+class SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
@@ -17,7 +17,7 @@ class SplashScreenState extends State<MyHomePage> {
         Duration(seconds: 5),
             () => Navigator.pushReplacement(
             context, MaterialPageRoute(
-            builder: (context) => HomePage()
+            builder: (context) => LandingPage()
         ))
     );
   }
