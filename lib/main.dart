@@ -8,7 +8,7 @@ import 'package:orquestapp/utils/auth.dart';
 import 'package:provider/provider.dart';
 
 
-// TODO: Main -> Landing page -> signin / signup / googleSignIn
+// TODO: Main -> Landing page -> sign in / signup / googleSignIn
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
