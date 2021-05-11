@@ -1,9 +1,6 @@
-// stateful widget connect to splashscreen
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../main.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -11,6 +8,7 @@ class MyHomePage extends StatefulWidget {
   SplashScreenState createState() => SplashScreenState();
 }
 
+// stateful widget connect to splashscreen
 class SplashScreenState extends State<MyHomePage> {
   @override
   void initState() {
