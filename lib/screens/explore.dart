@@ -25,7 +25,8 @@ class _ExploreState extends State<Explore> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.blue[200],
+        title: Text('Explore'), centerTitle: true,
       ),
       body: Container(
         child: Center(
@@ -33,15 +34,18 @@ class _ExploreState extends State<Explore> {
             children: [
               Column(     // TODO: explore page
                 children: <Widget>[
+                  SizedBox(
+                    height: 50,
+                  ),
                   Text(
-                    "Explore Page",
+                    'Explore Page',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
                     ),
                   ),
                   SizedBox(
-                    height: 650,
+                    height: 500,
                   ),
                 ],
               ),
