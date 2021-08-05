@@ -1,92 +1,59 @@
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:orquestapp/screens/landingPage.dart';
-import 'package:orquestapp/utils/auth.dart';
 import 'package:provider/provider.dart';
+import 'package:orquestapp/components/life_cycle_event_handler.dart';
+import 'package:orquestapp/screens/landing_page.dart';
+import 'package:orquestapp/screens/explore.dart';
+import 'package:orquestapp/services/user_service.dart';
+import 'package:orquestapp/utils/config.dart';
+import 'package:orquestapp/utils/constants.dart';
+import 'package:orquestapp/utils/providers.dart';
 
-
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(myApp());
+  await Config.initFirebase();
+  runApp(MyApp());
 }
-class myApp extends StatefulWidget {
 
+class MyApp extends StatefulWidget {
   @override
-  _myAppState createState() => _myAppState();
+  _MyAppState createState() => _MyAppState();
 }
 
-class _myAppState extends State<myApp> {
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(
+      LifecycleEventHandler(
+        detachedCallBack: () => UserService().setUserStatus(false),
+        resumeCallBack: () => UserService().setUserStatus(true),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Provider<AuthService>(
-        create: (context) => AuthService(),
-        child:
-
-        MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: LandingPage(), // go to stateful widget
-        )
+    return MultiProvider(
+      providers: providers,
+      child: Consumer<ThemeNotifier>(
+        builder: (context, ThemeNotifier notifier, child) {
+          return MaterialApp(
+            title: Constants.appName,
+            debugShowCheckedModeBanner: false,
+            theme: notifier.dark ? Constants.darkTheme : Constants.lightTheme,
+            home: StreamBuilder(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
+                if (snapshot.hasData) {
+                  return Explore();
+                } else
+                  return LandingPage();
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }
-
-
-
-//
-//
-//
-// }
-//
-// // stateful widget connect to splashscreen
-// class MyHomePage extends StatefulWidget {
-//   @override
-//   SplashScreenState createState() => SplashScreenState();
-// }
-//
-// class SplashScreenState extends State<MyHomePage> {
-//   @override
-//
-//
-//   void initState() {
-//     super.initState();
-//     Timer(
-//         Duration(seconds: 5),
-//         () => Navigator.pushReplacement(
-//             context, MaterialPageRoute(
-//             builder: (context) => HomePage()
-//         ))
-//     );
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return
-//       Container(
-//         color: Colors.deepPurpleAccent, child: Image.asset('assets/logo.png'));
-//   }
-// }
-
-
-// class HomePage extends StatelessWidget {
-//
-//   Future<void> _signInWithGoogle(BuildContext context) async {
-//     try {
-//       final auth = Provider.of<AuthService>(context, listen: false);
-//       await auth.signInWithGoogle();
-//     } catch (e) {
-//       print(e.toString());
-//     }
-//   }
-
-/*
-  Future<void> _signInWithFacebook(BuildContext context) async {
-    try {
-      final auth = Provider.of<AuthService>(context, listen: false);
-      await auth.signInWithFacebook();
-    } catch (e) {
-      print(e.toString());
-    }
-  }
-*/
-

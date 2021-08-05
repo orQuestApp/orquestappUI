@@ -1,77 +1,117 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:orquestapp/utils/auth.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_icons/flutter_icons.dart';
+import 'package:orquestapp/components/fab_container.dart';
+import 'package:orquestapp/pages/notification.dart';
+import 'package:orquestapp/pages/profile.dart';
+import 'package:orquestapp/pages/search.dart';
+import 'package:orquestapp/pages/feeds.dart';
+import 'package:orquestapp/utils/firebase.dart';
 
-class Explore extends StatefulWidget{
+class Explore extends StatefulWidget {
   @override
   _ExploreState createState() => _ExploreState();
 }
 
 class _ExploreState extends State<Explore> {
+  int _page = 0;
 
-  Future<void> _signOut(BuildContext context) async {
-    try {
-      final auth = Provider.of<AuthService>(context, listen: false);
-      await auth.signOut();
-    } catch (e) {
-      print(e.toString());
-    }
-    Navigator.popUntil(context, ModalRoute.withName("/"));
-  }
-
+  List pages = [
+    {
+      'title': 'Home',
+      'icon': Feather.home,
+      'page': Timeline(),
+      'index': 0,
+    },
+    {
+      'title': 'Search',
+      'icon': Feather.search,
+      'page': Search(),
+      'index': 1,
+    },
+    {
+      'title': 'unsee',
+      'icon': Feather.plus_circle,
+      'page': Text('nes'),
+      'index': 2,
+    },
+    {
+      'title': 'Notification',
+      'icon': CupertinoIcons.bell_solid,
+      'page': Activities(),
+      'index': 3,
+    },
+    {
+      'title': 'Profile',
+      'icon': CupertinoIcons.person,
+      'page': Profile(profileId: firebaseAuth.currentUser.uid),
+      'index': 4,
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue[200],
-        title: Text('Explore'), centerTitle: true,
+      body: PageTransitionSwitcher(
+        transitionBuilder: (
+          Widget child,
+          Animation<double> animation,
+          Animation<double> secondaryAnimation,
+        ) {
+          return FadeThroughTransition(
+            animation: animation,
+            secondaryAnimation: secondaryAnimation,
+            child: child,
+          );
+        },
+        child: pages[_page]['page'],
       ),
-      body: Container(
-        child: Center(
-          child: Column(
-            children: [
-              Column(     // TODO: explore page
-                children: <Widget>[
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Text(
-                    'Explore Page',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(width: 5),
+            for (Map item in pages)
+              item['index'] == 2
+                  ? buildFab()
+                  : Padding(
+                      padding: const EdgeInsets.only(top: 5.0),
+                      child: IconButton(
+                        icon: Icon(
+                          item['icon'],
+                          color: item['index'] != _page
+                              ? Colors.grey
+                              : Theme.of(context).accentColor,
+                          size: 20.0,
+                        ),
+                        onPressed: () => navigationTapped(item['index']),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 500,
-                  ),
-                ],
-              ),
-              MaterialButton(
-                minWidth: double.infinity,
-                height: 60,
-                onPressed: () {
-                  _signOut(context);
-                },
-                color: Color(0xff0095FF),
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                child: Text(
-                  "Sign out", style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18,
-                  color: Colors.white,
-                ),
-                ),
-              ),
-            ],
-          ),
+            SizedBox(width: 5),
+          ],
         ),
       ),
     );
+  }
+
+  buildFab() {
+    return Container(
+      height: 45.0,
+      width: 45.0,
+      // ignore: missing_required_param
+      child: FabContainer(
+        icon: Feather.plus,
+        mini: true,
+      ),
+    );
+  }
+
+  void navigationTapped(int page) {
+    setState(() {
+      _page = page;
+    });
   }
 }

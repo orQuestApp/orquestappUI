@@ -14,14 +14,18 @@ class SignupPage extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios,
+          icon: Icon(
+            Icons.arrow_back_ios,
             size: 20,
-            color: Colors.black,),
+            color: Colors.black,
+          ),
         ),
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 40),
+          padding: EdgeInsets.symmetric(
+              horizontal: 40,
+          ),
           height: MediaQuery.of(context).size.height - 50,
           width: double.infinity,
           child: Column(
@@ -33,8 +37,11 @@ class SignupPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
-                    ),),
-                  SizedBox(height: 20,),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Text("Create an account, It's free ",
                     style: TextStyle(
                         fontSize: 15,
@@ -63,7 +70,9 @@ class SignupPage extends StatelessWidget {
                 child: MaterialButton(
                   minWidth: double.infinity,
                   height: 60,
-                  onPressed: () {},
+                  onPressed: () {
+                    // TODO: Signup
+                  },
                   color: Color(0xff0095FF),
                   elevation: 0,
                   shape: RoundedRectangleBorder(
@@ -82,13 +91,14 @@ class SignupPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text("Already have an account?"),
-                  Text(" Login", style:TextStyle(
+                  Text(" Login",
+                    style:TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 18
+                      fontSize: 18,
                   ),
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),
@@ -117,16 +127,20 @@ Widget inputFile({label, obscureText = false})
       TextField(
         obscureText: obscureText,
         decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 0,
-                horizontal: 10),
+            contentPadding: EdgeInsets.symmetric(
+                vertical: 0,
+                horizontal: 10
+            ),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                   color: Colors.grey
               ),
             ),
             border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey)
-            )
+                borderSide: BorderSide(
+                    color: Colors.grey
+                ),
+            ),
         ),
       ),
       SizedBox(height: 10,)

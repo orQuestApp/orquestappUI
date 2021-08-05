@@ -1,15 +1,15 @@
+/*
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:orquestapp/utils/auth.dart';
+import 'package:orquestapp/services/auth_service.dart';
 import 'package:provider/provider.dart';
-import 'models/login.dart';
-import 'models/signUp.dart';
+import '../models/login.dart';
+import '../models/sign_up.dart';
 
-final GoogleSignIn gSignIn= GoogleSignIn(); // added
+final GoogleSignIn gSignIn = GoogleSignIn(); // added
 
 class HomePage extends StatelessWidget {
-
   // ignore: non_constant_identifier_names
   Future<void> GoogleSignIn(BuildContext context) async {
     try {
@@ -20,6 +20,7 @@ class HomePage extends StatelessWidget {
     }
   }
 
+*/
 /*
   Future<void> _signInWithFacebook(BuildContext context) async {
     try {
@@ -29,24 +30,22 @@ class HomePage extends StatelessWidget {
       print(e.toString());
     }
   }
-*/
-
+*//*
 
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return Scaffold(
       body: SafeArea(
         child: Container(
-          // we will give media query height
-          // double.infinity make it big as my parent allows
-          // while MediaQuery make it big as per the screen
-          width: double.infinity,
+
+          //TODO change size variables for adaptive size
+          width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
+          padding: EdgeInsets.symmetric(
+              horizontal: 30,
+              vertical: 50
+          ),
           child: Column(
             // even space distribution
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,18 +77,16 @@ class HomePage extends StatelessWidget {
                 height: MediaQuery.of(context).size.height / 3,
                 decoration: BoxDecoration(
                     image:
-                    DecorationImage(image: AssetImage("assets/logo.png"))),
+                        DecorationImage(image: AssetImage("assets/logo.png"))),
               ),
               Column(
                 children: <Widget>[
                   // gSignIn Button
                   MaterialButton(
-                    minWidth: double.infinity,
+                    minWidth: MediaQuery.of(context).size.width,
                     height: 60,
                     onPressed: () {
-                      return
-
-                        GoogleSignIn(context);
+                      return GoogleSignIn(context);
                     },
                     color: Color(0xFF104787),
                     shape: RoundedRectangleBorder(
@@ -106,7 +103,7 @@ class HomePage extends StatelessWidget {
                   SizedBox(height: 20),
                   // the login button
                   MaterialButton(
-                    minWidth: double.infinity,
+                    minWidth: MediaQuery.of(context).size.width,
                     height: 60,
                     onPressed: () {
                       Navigator.push(context,
@@ -119,13 +116,13 @@ class HomePage extends StatelessWidget {
                     child: Text(
                       "Login",
                       style:
-                      TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                     ),
                   ),
                   // creating the signup button
                   SizedBox(height: 20),
                   MaterialButton(
-                    minWidth: double.infinity,
+                    minWidth: MediaQuery.of(context).size.width,
                     height: 60,
                     onPressed: () {
                       Navigator.push(
@@ -145,7 +142,7 @@ class HomePage extends StatelessWidget {
                     ),
                   )
                 ],
-              )
+              ),
             ],
           ),
         ),
@@ -153,3 +150,4 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+*/
